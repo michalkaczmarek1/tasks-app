@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.LENIENT)
 class TrelloClientTest {
 
     @InjectMocks
@@ -88,7 +87,7 @@ class TrelloClientTest {
         when(trelloConfig.getTrelloApiEndpoint()).thenReturn("http://test.com");
         when(trelloConfig.getTrelloAppKey()).thenReturn("test");
         when(trelloConfig.getTrelloToken()).thenReturn("test");
-        when(trelloConfig.getTrelloUser()).thenReturn("test");
+//        when(trelloConfig.getTrelloUser()).thenReturn("test");
         TrelloCardDto trelloCardDto = new TrelloCardDto(
                 "Test task",
                 "Test Description",
