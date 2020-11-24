@@ -96,16 +96,22 @@ class TrelloFacadeTest {
             });
         });
     }
-//
-//    @Test
-//    void shouldCreateTrelloCard() {
-//        //Given
-//        TrelloCardDto trelloCardDto = new TrelloCardDto("test", "test", "top", "1");
-//
-//        //When
-//        CreatedTrelloCardDto createdTrelloCardDto = trelloFacade.createCard(trelloCardDto);
-//
-//        //Then
-//        assertEquals("test", createdTrelloCardDto.getName());
-//    }
+
+    @Test
+    void shouldCreateTrelloCard() {
+        //Given
+        TrelloCardDto trelloCardDto = new TrelloCardDto("test", "test", "top", "1");
+        TrelloCard trelloCard = new TrelloCard("test", "test", "top", "1");
+        CreatedTrelloCardDto createdTrelloCardDto = new CreatedTrelloCardDto("1", "test", "http://test.com");
+
+        when(trelloMapper.mapToCard(trelloCardDto)).thenReturn(trelloCard);
+        when(trelloMapper.mapToCardDto(trelloCard)).thenReturn(trelloCardDto);
+        when(trelloService.createTrelloCard(trelloCardDto)).thenReturn(createdTrelloCardDto);
+
+        //When
+        CreatedTrelloCardDto createdTrelloCardDto1 = trelloFacade.createCard(trelloCardDto);
+
+        //Then
+        assertEquals("http://test.com", createdTrelloCardDto1.getShortUrl());
+    }
 }
