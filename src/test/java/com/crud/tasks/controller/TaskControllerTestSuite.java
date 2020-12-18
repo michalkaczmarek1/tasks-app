@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
@@ -120,9 +121,9 @@ class TaskControllerTestSuite {
         TaskDto taskDto = new TaskDto(1L, "Test", "Test desc");
         Task task = new Task(1L, "Test", "Test desc");
 
-        when(taskMapper.mapToTask(taskDto)).thenReturn(task);
+        when(taskMapper.mapToTask(any())).thenReturn(task);
         when(dbService.saveTask(task)).thenReturn(task);
-        when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
+        when(taskMapper.mapToTaskDto(any())).thenReturn(taskDto);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
@@ -134,7 +135,8 @@ class TaskControllerTestSuite {
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("UTF-8")
                     .content(jsonContent))
-            .andExpect(MockMvcResultMatchers.status().is(200));
+            .andExpect(MockMvcResultMatchers.status().is(200))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.title", Matchers.is("Test")));
     }
 
     @Test
