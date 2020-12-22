@@ -37,7 +37,7 @@ public class MailCreatorService {
         context.setVariable("button", "Visit website");
         context.setVariable("admin_name", adminConfig.getAdminName());
         context.setVariable("goodbye_message", "Dziekujemy " + adminConfig.getAdminName() + " za skorzystanie z naszego serwisu! Miłego dnia");
-        context.setVariable("company_details", companyName + ", " + companyEmail + ", tel." + companyPhone +"\n" + companyGoal);
+        context.setVariable("company_details", companyName + ", " + companyEmail + ", tel." + companyPhone + " | " + companyGoal);
         return templateEngine.process("mail/created-trello-card-mail", context);
     }
 
