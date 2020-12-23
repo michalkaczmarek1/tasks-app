@@ -30,6 +30,8 @@ public class MailCreatorService {
 
     private TaskRepository taskRepository;
 
+    private List<Task> tasks = new ArrayList<>();
+
     @Autowired
     private AdminConfig adminConfig;
 
