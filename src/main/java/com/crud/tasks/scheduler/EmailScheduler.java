@@ -26,7 +26,7 @@ public class EmailScheduler {
     {
         long size = taskRepository.count();
         String wordTask = size == 1 ? " task" : " tasks";
-        simpleEmailService.send(
+        simpleEmailService.sendMailScheduled(
                 new Mail(
                         adminConfig.getAdminMail(),
                         SUBJECT,
