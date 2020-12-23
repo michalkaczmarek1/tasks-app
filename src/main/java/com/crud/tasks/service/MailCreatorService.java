@@ -70,8 +70,8 @@ public class MailCreatorService {
         context.setVariable("admin_config", adminConfig);
         context.setVariable("company_details", companyName + ", " + companyEmail + ", tel." + companyPhone + " | " + companyGoal);
         context.setVariable("goodbye_message", "Dziekujemy " + adminConfig.getAdminName() + " za skorzystanie z naszego serwisu! Miłego dnia");
-        context.setVariable("tasks", tasks);
         if(taskRepository.count() > 0) {
+            context.setVariable("tasks", tasks);
             context.setVariable("amountTasksGreaterThanZero", true);
         } else {
             context.setVariable("amountTasksGreaterThanZero", false);
