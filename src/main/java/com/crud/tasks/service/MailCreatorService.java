@@ -28,6 +28,7 @@ public class MailCreatorService {
     @Value("${info.company.phone}")
     private String companyPhone;
 
+    @Autowired
     private TaskRepository taskRepository;
 
     private List<Task> tasks = new ArrayList<>();
@@ -62,7 +63,7 @@ public class MailCreatorService {
 
     public String buildScheduledEmail(String message) {
 
-//        List<Task> tasks = taskRepository.findAll();
+        List<Task> tasks = taskRepository.findAll();
 
         Context context = new Context();
 
@@ -73,7 +74,7 @@ public class MailCreatorService {
         context.setVariable("company_details", companyName + ", " + companyEmail + ", tel." + companyPhone + " | " + companyGoal);
         context.setVariable("goodbye_message", "Dziekujemy " + adminConfig.getAdminName() + " za skorzystanie z naszego serwisu! Miłego dnia");
         if(taskRepository.count() > 0) {
-//            context.setVariable("tasks", tasks);
+            context.setVariable("tasks", tasks);
             context.setVariable("amountTasksGreaterThanZero", true);
         } else {
             context.setVariable("amountTasksGreaterThanZero", false);
