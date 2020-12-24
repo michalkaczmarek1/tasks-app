@@ -46,7 +46,7 @@ class TaskControllerTestSuite {
         //When & Then
         mockMvc
             .perform(MockMvcRequestBuilders
-                .get("/v1/task/getTasks")
+                .get("/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(MockMvcResultMatchers.status().isOk())
         .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(0)));
@@ -64,7 +64,7 @@ class TaskControllerTestSuite {
         //When & Then
         mockMvc
             .perform(MockMvcRequestBuilders
-                    .get("/v1/task/getTasks")
+                    .get("/v1/tasks")
                     .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(1)))
             .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(1)))
@@ -84,8 +84,7 @@ class TaskControllerTestSuite {
         //When & Then
         mockMvc
             .perform(MockMvcRequestBuilders
-                    .get("/v1/task/getTask")
-                    .param("taskId", "1")
+                    .get("/v1/tasks/1")
                     .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(1)))
@@ -108,7 +107,7 @@ class TaskControllerTestSuite {
         //When & Then
         mockMvc
             .perform(MockMvcRequestBuilders
-                    .post("/v1/task/createTask")
+                    .post("/v1/tasks")
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("UTF-8")
                     .content(jsonContent))
@@ -131,7 +130,7 @@ class TaskControllerTestSuite {
         //When & Then
         mockMvc
             .perform(MockMvcRequestBuilders
-                    .put("/v1/task/updateTask")
+                    .put("/v1/tasks")
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("UTF-8")
                     .content(jsonContent))
@@ -144,8 +143,7 @@ class TaskControllerTestSuite {
         //When & Then
         mockMvc
             .perform(MockMvcRequestBuilders
-                    .delete("/v1/task/deleteTask")
-                    .param("taskId", "1"))
+                    .delete("/v1/tasks/1"))
             .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }
